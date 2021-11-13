@@ -1,9 +1,13 @@
 void zoomIn() {
-    PImage bigger = createImage(mPX - mX, mPY - mY,RGB);
-    bigger.loadPixels();
-    strokeWeight(1);
+    strokeWeight(1);//show the seclect area
     noFill();
     rect(mX,mY,mPX - mX,mPY - mY);
+
+    img.loadPixels();
+    PImage bigger = createImage(mPX - mX, mPY - mY,RGB);
+    bigger.loadPixels();
+    //load org img on the "img plate"
+    //copy the piexl of select area to top left
     for (int x = 0; x < mPX - mX; x++) {
         for (int y = 0; y < mPY - mY; y++) {
             bigger.pixels[x + y * (mPX - mX)] = pixels[x + mX + (y + mY) * width];
@@ -14,6 +18,7 @@ void zoomIn() {
 }
 
 void distress() {
+    img.loadPixels();
     image(img, 35, 35);
     for (int i = 0;i < (img.width * img.height / 7); i ++) {
         int loc = int(random(img.width * img.height));
@@ -43,25 +48,25 @@ void painting() {
 }
 
 void movie() {
+    img.loadPixels();
     loadPixels();
     for (int x = 0; x < img.width; x++) {
         for (int y = 0; y < img.height; y++) {
             int loc = x + y * img.width;
-            float r;
-            r = red(img.pixels[loc]);
+            float r = red(img.pixels[loc]);
             float maxdist = 100;
             float d = dist(x, y, 202, 222);
-            float adjustbrightness = 100 * (maxdist - d) / maxdist;
-            r += adjustbrightness;
+            float brightness = 100 * (maxdist - d) / maxdist;
+            r += brightness;
             r = constrain(r, 0, 200);
-            color c = color(r);
-            pixels[x + 35 + (y + 35) * width] = c;
+            pixels[x + 35 + (y + 35) * width] = color(r);
         }
     }
     updatePixels();
 }
 
 void light() {
+    img.loadPixels();
     loadPixels();
     for (int x = 0; x < img.width; x++) {
         for (int y = 0; y < img.height; y++) {
