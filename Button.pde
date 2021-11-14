@@ -4,7 +4,7 @@ void zoomIn() {
     rect(mX,mY,mPX - mX,mPY - mY);
 
     img.loadPixels();
-    PImage bigger = createImage(mPX - mX, mPY - mY,RGB);
+    PImage bigger = createImage(mPX-mX,mPY-mY,RGB);
     bigger.loadPixels();
     //load org img on the "img plate"
     //copy the piexl of select area to top left
